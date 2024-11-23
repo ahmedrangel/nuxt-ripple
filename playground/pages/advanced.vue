@@ -35,6 +35,7 @@ const generateDynamic = async () => {
 
 onMounted(async () => {
   setInterval(() => randomColor.value = getRandomColor(), 1000)
+  await generateDynamic();
 })
 </script>
 
