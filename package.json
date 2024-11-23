@@ -1,0 +1,74 @@
+{
+  "name": "nuxt-ripple",
+  "version": "0.0.1",
+  "description": "",
+  "keywords": [
+    "nuxt",
+    "ripple",
+    "vue",
+    "css"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ahmedrangel/nuxt-ripple.git"
+  },
+  "homepage": "https://github.com/ahmedrangel/nuxt-ripple",
+  "author": {
+    "name": "Ahmed Rangel",
+    "email": "ahmedrangel@outlook.com",
+    "url": "https://ahmedrangel.com/"
+  },
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/types.d.ts",
+      "import": "./dist/module.mjs",
+      "require": "./dist/module.cjs"
+    }
+  },
+  "main": "./dist/module.cjs",
+  "types": "./dist/types.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "prepack": "nuxt-module-build build",
+    "dev": "nuxi dev playground",
+    "dev:build": "nuxi build playground",
+    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground",
+    "release": "npm run lint && npm run prepack && npm run test && changelogen --release && npm publish && git push --follow-tags",
+    "lint": "eslint .",
+    "test": "vitest run --reporter=verbose",
+    "test:types": "vue-tsc --noEmit",
+    "test:watch": "vitest watch"
+  },
+  "dependencies": {
+    "@nuxt/kit": "^3.14.1592",
+    "@vueuse/core": "^11.2.0"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "^1.6.1",
+    "@nuxt/eslint-config": "^0.6.2",
+    "@nuxt/module-builder": "^0.8.4",
+    "@nuxt/schema": "^3.14.1592",
+    "@nuxt/test-utils": "^3.14.4",
+    "@nuxt/ui": "2.19.2",
+    "@types/chroma-js": "^2.4.4",
+    "@types/node": "^22.9.1",
+    "changelogen": "^0.5.7",
+    "chroma-js": "3.1.2",
+    "eslint": "^9.14.0",
+    "nuxt": "^3.14.1592",
+    "vitest": "^2.1.5",
+    "vue-tsc": "^2.1.10"
+  },
+  "packageManager": "pnpm@9.14.2",
+  "changelog": {
+    "repo": {
+      "repo": "ahmedrangel/nuxt-ripple",
+      "provider": "github",
+      "domain": "github.com"
+    }
+  }
+}

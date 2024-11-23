@@ -1,0 +1,24 @@
+.nuxt-ripple {
+  position: relative;
+}
+
+.nuxt-ripple:before {
+  content: '';
+  background-color: var(--nuxt-ripple-background-color);
+  position: absolute;
+  display: block;     
+  border-radius: 100%;
+  pointer-events: none;
+  opacity: calc(var(--o, 1) * 1);
+  top: calc(var(--y) * 1px);
+  left: calc(var(--x) * 1px);
+  width:  calc(var(--d) * 1px);
+  height: calc(var(--d) * 1px); 
+  transform-origin: center;
+  z-index: 9999;
+}
+
+.nuxt-ripple-pulse:before {
+  top: 50%;
+  left: 50%;
+}
