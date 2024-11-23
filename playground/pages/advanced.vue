@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import chroma from 'chroma-js'
 
-const globalRipple = useRipple()
+const ripple = useRipple()
 const dynamic = ref(false)
 
 const toRGBA = (hex: string, aplha?: number) => {
@@ -13,18 +13,18 @@ const toHex = (value: string) => {
   return chroma(value).alpha(1).hex()
 }
 
-const randomColor = ref<string>(globalRipple.value.color)
-const currentMode = ref(globalRipple.value.mode)
-const currentColor = ref<string>(toHex(globalRipple.value.color))
+const randomColor = ref<string>(ripple.value.color)
+const currentMode = ref(ripple.value.mode)
+const currentColor = ref<string>(toHex(ripple.value.color))
 const currentOpacity = ref(1)
-const currentOverflow = ref<boolean>(globalRipple.value.overflow)
+const currentOverflow = ref<boolean>(ripple.value.overflow)
 
 const getRandomColor = () => `#${((Math.random() * 0xFFFFFF) << 0).toString(16).padStart(6, '0')}`
 
 watchEffect(() => {
-  globalRipple.value.mode = currentMode.value
-  globalRipple.value.color = toRGBA(currentColor.value, currentOpacity.value)
-  globalRipple.value.overflow = currentOverflow.value
+  ripple.value.mode = currentMode.value
+  ripple.value.color = toRGBA(currentColor.value, currentOpacity.value)
+  ripple.value.overflow = currentOverflow.value
 })
 
 const generateDynamic = async () => {
@@ -44,7 +44,7 @@ onMounted(async () => {
     <p>Using <b>useRipple()</b> composable to mutate default configs</p>
     <div class="flex flex-wrap gap-2">
       <span class="border p-2">
-        <p class="text-lg">Mode: {{ !globalRipple.mode ? "click" : globalRipple.mode }}</p>
+        <p class="text-lg">Mode: {{ !ripple.mode ? "click" : ripple.mode }}</p>
         <USelect v-model="currentMode" :options="['click', 'hover', 'pulse']" />
       </span>
       <span class="border p-2">
@@ -56,7 +56,7 @@ onMounted(async () => {
         <URange v-model="currentOpacity" :min="0" :max="1" :step="0.1" />
       </span>
       <span class="border p-2">
-        <p class="text-lg">Overflow: {{ globalRipple.overflow ? "true" : "false" }}</p>
+        <p class="text-lg">Overflow: {{ ripple.overflow ? "true" : "false" }}</p>
         <UToggle v-model="currentOverflow" />
       </span>
       <span class="border p-2">
