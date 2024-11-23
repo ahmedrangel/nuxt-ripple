@@ -14,7 +14,7 @@ const toHex = (value: string) => {
 }
 
 const randomColor = ref<string>(globalRipple.value.color)
-const currentTrigger = ref(globalRipple.value.mode)
+const currentMode = ref(globalRipple.value.mode)
 const currentColor = ref<string>(toHex(globalRipple.value.color))
 const currentOpacity = ref(1)
 const currentOverflow = ref<boolean>(globalRipple.value.overflow)
@@ -22,7 +22,7 @@ const currentOverflow = ref<boolean>(globalRipple.value.overflow)
 const getRandomColor = () => `#${((Math.random() * 0xFFFFFF) << 0).toString(16).padStart(6, '0')}`
 
 watchEffect(() => {
-  globalRipple.value.mode = currentTrigger.value
+  globalRipple.value.mode = currentMode.value
   globalRipple.value.color = toRGBA(currentColor.value, currentOpacity.value)
   globalRipple.value.overflow = currentOverflow.value
 })
@@ -45,7 +45,7 @@ onMounted(async () => {
     <div class="flex flex-wrap gap-2">
       <span class="border p-2">
         <p class="text-lg">Mode: {{ !globalRipple.mode ? "click" : globalRipple.mode }}</p>
-        <USelect v-model="currentTrigger" :options="['click', 'hover', 'pulse']" />
+        <USelect v-model="currentMode" :options="['click', 'hover', 'pulse']" />
       </span>
       <span class="border p-2">
         <p class="text-lg">Color: {{ chroma(currentColor).rgb() }}</p>
