@@ -32,9 +32,7 @@ class Ripple {
 const ripple = new Ripple()
 
 export default defineNuxtPlugin((nuxtApp) => {
-  const config = useAppConfig().ripple || {}
-  const useRipple = useState('nuxt-ripple-config')
-  useRipple.value = config
+  useState('nuxt-ripple-config', () => useAppConfig().ripple)
   nuxtApp.hook('app:mounted', () => {
     useMutationObserver(document.body, () => {
       ripple.mountRipple()
