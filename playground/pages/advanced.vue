@@ -1,21 +1,21 @@
 <script setup lang="ts">
-import chroma from 'chroma-js'
+import chroma from 'color'
 
 const { color, mode, overflow } = useRipple()
 const dynamic = ref(false)
 
 const toRGBA = (hex: string, aplha?: number) => {
-  const [r, g, b] = chroma(hex).rgb()
+  const [r, g, b] = chroma(hex).rgb().array()
   return `rgba(${r},${g},${b},${aplha || currentOpacity.value})`
 }
 
 const toHex = (value: string) => {
-  return chroma(value).alpha(1).hex()
+  return chroma(value).hex()
 }
 
 const randomColor = ref(color)
 const currentMode = ref(mode)
-const currentColor = ref(toHex('white'))
+const currentColor = ref(toHex(color))
 const currentOpacity = ref(1)
 const currentOverflow = ref(overflow)
 
@@ -51,7 +51,7 @@ onMounted(async () => {
         <USelect v-model="currentMode" :options="['click', 'hover', 'pulse']" />
       </span>
       <span class="border p-2">
-        <p class="text-lg">Color: {{ chroma(currentColor).rgb() }}</p>
+        <p class="text-lg">Color: {{ chroma(currentColor).rgb().array() }}</p>
         <input v-model="currentColor" type="color" style="width: 90px; height: 36px;">
       </span>
       <span class="border p-2">
