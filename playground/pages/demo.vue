@@ -42,9 +42,9 @@ onMounted(async () => {
 </script>
 
 <template>
-  <main class="container mx-auto py-5">
+  <main class="container mx-auto py-5 px-2 overflow-hidden">
     <p class="text-3xl mb-2">Global settings</p>
-    <p>Using <b>useRipple()</b> composable to mutate default configs</p>
+    <p>Using <b>useRipple({ ...options })</b> to mutate default configs</p>
     <div class="flex flex-wrap gap-2">
       <span class="border p-2">
         <p class="text-lg">Mode: {{ !currentMode ? "click" : currentMode }}</p>
