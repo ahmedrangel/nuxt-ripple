@@ -1,6 +1,6 @@
 {
   "name": "nuxt-ripple",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "",
   "keywords": [
     "nuxt",
@@ -54,10 +54,9 @@
     "@nuxt/schema": "^3.14.1592",
     "@nuxt/test-utils": "^3.14.4",
     "@nuxt/ui": "2.19.2",
-    "@types/chroma-js": "^2.4.4",
     "@types/node": "^22.9.1",
     "changelogen": "^0.5.7",
-    "chroma-js": "3.1.2",
+    "color": "^4.2.3",
     "eslint": "^9.14.0",
     "nuxt": "^3.14.1592",
     "vitest": "^2.1.5",
