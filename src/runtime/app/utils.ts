@@ -1,4 +1,4 @@
-import type { Intervals, Listeners, NuxtRippleRuntimeOptions, RippleDataAttributes, CssTextBuilder } from '../../types'
+import type { Intervals, Listeners, NuxtRippleRuntimeOptions, RippleDataAttributes, CssTextBuilder, RippleDirectiveOptions } from '../../types'
 
 enum RippleEvent {
   CLICK = 'mousedown',
@@ -95,5 +95,12 @@ export const modeHandler = (el: HTMLElement, config: NuxtRippleRuntimeOptions, l
   else {
     el.addEventListener(RippleEvent.CLICK, eventHandler)
     listeners.set(el, eventHandler)
+  }
+}
+
+export const setAttributes = (el: HTMLElement, values?: Partial<RippleDirectiveOptions>) => {
+  if (!values) return
+  for (const [key, value] of Object.entries(values)) {
+    el.setAttribute(`data-ripple-${key}`, String(value))
   }
 }
