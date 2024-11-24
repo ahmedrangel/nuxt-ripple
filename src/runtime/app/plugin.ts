@@ -15,25 +15,24 @@ class Ripple {
   }
 
   mountRipple() {
-    this.state = useState<NuxtRippleRuntimeOptions>('nuxt-ripple-config')
+    this.state.value = useState<NuxtRippleRuntimeOptions>('nuxt-ripple-config').value
     watch(this.state, () => {
-      const config = this.state.value
-      if (!config) return
-      addHeadStyles(config)
+      if (!this.state.value) return
+      addHeadStyles(this.state.value)
       const selector = document.querySelectorAll<HTMLElement>('.nuxt-ripple')
       for (const el of selector) {
         unmountListeners(el, this.listeners, this.intervals)
-        modeHandler(el, config, this.listeners, this.intervals)
+        modeHandler(el, this.state.value, this.listeners, this.intervals)
       }
     }, { immediate: true })
   }
 }
 
-const ripple = new Ripple()
-
 export default defineNuxtPlugin((nuxtApp) => {
-  useState('nuxt-ripple-config', () => useAppConfig().ripple)
+  const ripple = new Ripple()
+  useState('nuxt-ripple-config').value = useAppConfig().ripple
   nuxtApp.hook('app:mounted', () => {
+    ripple.mountRipple()
     useMutationObserver(document.body, () => {
       ripple.mountRipple()
     }, { childList: true, subtree: true })
@@ -46,5 +45,8 @@ export default defineNuxtPlugin((nuxtApp) => {
       el.classList.remove('nuxt-ripple')
       unmountListeners(el, ripple.listeners, ripple.intervals)
     },
+    getSSRProps () {
+      return {}
+    }
   })
 })

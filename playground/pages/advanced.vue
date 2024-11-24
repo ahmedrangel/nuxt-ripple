@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import chroma from 'chroma-js'
 
-const ripple = useRipple()
+const { color, mode, overflow } = useRipple()
 const dynamic = ref(false)
 
 const toRGBA = (hex: string, aplha?: number) => {
@@ -13,18 +13,20 @@ const toHex = (value: string) => {
   return chroma(value).alpha(1).hex()
 }
 
-const randomColor = ref<string>(ripple.value.color)
-const currentMode = ref(ripple.value.mode)
-const currentColor = ref<string>(toHex(ripple.value.color))
+const randomColor = ref(color)
+const currentMode = ref(mode)
+const currentColor = ref(toHex(color))
 const currentOpacity = ref(1)
-const currentOverflow = ref<boolean>(ripple.value.overflow)
+const currentOverflow = ref(overflow)
 
 const getRandomColor = () => `#${((Math.random() * 0xFFFFFF) << 0).toString(16).padStart(6, '0')}`
 
 watchEffect(() => {
-  ripple.value.mode = currentMode.value
-  ripple.value.color = toRGBA(currentColor.value, currentOpacity.value)
-  ripple.value.overflow = currentOverflow.value
+  useRipple({
+    mode: currentMode.value,
+    color: toRGBA(currentColor.value, currentOpacity.value),
+    overflow: currentOverflow.value
+  })
 })
 
 const generateDynamic = async () => {
@@ -45,7 +47,7 @@ onMounted(async () => {
     <p>Using <b>useRipple()</b> composable to mutate default configs</p>
     <div class="flex flex-wrap gap-2">
       <span class="border p-2">
-        <p class="text-lg">Mode: {{ !ripple.mode ? "click" : ripple.mode }}</p>
+        <p class="text-lg">Mode: {{ !currentMode ? "click" : currentMode }}</p>
         <USelect v-model="currentMode" :options="['click', 'hover', 'pulse']" />
       </span>
       <span class="border p-2">
@@ -57,7 +59,7 @@ onMounted(async () => {
         <URange v-model="currentOpacity" :min="0" :max="1" :step="0.1" />
       </span>
       <span class="border p-2">
-        <p class="text-lg">Overflow: {{ ripple.overflow ? "true" : "false" }}</p>
+        <p class="text-lg">Overflow: {{ currentOverflow ? "true" : "false" }}</p>
         <UToggle v-model="currentOverflow" />
       </span>
       <span class="border p-2">
@@ -106,7 +108,7 @@ onMounted(async () => {
     <hr class="my-4 border-1 border-black">
     <p class="text-3xl">Dynamically generated</p>
     <div v-if="dynamic" class="flex gap-2 py-2">
-      <UButton v-ripple data-ripple-mode="click" class="p-4" data-ripple-overflow="true">MODE (click)</UButton>
+      <UButton v-ripple data-ripple-mode="click" class="p-4">MODE (click)</UButton>
       <UButton v-ripple data-ripple-mode="hover" class="p-4">HOVER</UButton>
       <UButton v-ripple :data-ripple-color="toRGBA('blue')" data-ripple-mode="pulse" data-ripple-overflow="true" class="p-4">BLUE + PULSE + OVERFLOW TRUE</UButton>
     </div>
