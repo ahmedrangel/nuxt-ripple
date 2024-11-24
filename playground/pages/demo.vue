@@ -1,28 +1,17 @@
 <script setup lang="ts">
 import chroma from 'color'
 
-const { color, mode, overflow } = useRipple()
+const { color, mode, overflow, updateRippleConfig } = useRipple()
+
+const currentMode = ref(mode)
+const currentColor = ref(toHex(color.value))
+const currentOpacity = ref(chroma(color.value).rgb().alpha())
+const currentOverflow = ref(overflow.value)
+const randomColor = ref(color.value)
 const dynamic = ref(false)
 
-const toRGBA = (hex: string, aplha?: number) => {
-  const [r, g, b] = chroma(hex).rgb().array()
-  return `rgba(${r},${g},${b},${aplha || currentOpacity.value})`
-}
-
-const toHex = (value: string) => {
-  return chroma(value).hex()
-}
-
-const randomColor = ref(color)
-const currentMode = ref(mode)
-const currentColor = ref(toHex(color))
-const currentOpacity = ref(1)
-const currentOverflow = ref(overflow)
-
-const getRandomColor = () => `#${((Math.random() * 0xFFFFFF) << 0).toString(16).padStart(6, '0')}`
-
 watchEffect(() => {
-  useRipple({
+  updateRippleConfig({
     mode: currentMode.value,
     color: toRGBA(currentColor.value, currentOpacity.value),
     overflow: currentOverflow.value,
@@ -44,10 +33,10 @@ onMounted(async () => {
 <template>
   <main class="container mx-auto py-5 px-2 overflow-hidden">
     <p class="text-3xl mb-2">Global settings</p>
-    <p>Using <b>useRipple({ ...options })</b> to mutate default configs</p>
+    <p>Using <b>updateRippleConfig({ ...options })</b> method from <b>useRipple()</b> composable to mutate the default configs</p>
     <div class="flex flex-wrap gap-2">
       <span class="border p-2">
-        <p class="text-lg">Mode: {{ !currentMode ? "click" : currentMode }}</p>
+        <p class="text-lg">Mode: {{ currentMode }}</p>
         <USelect v-model="currentMode" :options="['click', 'hover', 'pulse']" />
       </span>
       <span class="border p-2">
@@ -59,11 +48,11 @@ onMounted(async () => {
         <URange v-model="currentOpacity" :min="0" :max="1" :step="0.1" />
       </span>
       <span class="border p-2">
-        <p class="text-lg">Overflow: {{ currentOverflow ? "true" : "false" }}</p>
+        <p class="text-lg">Overflow: {{ currentOverflow }}</p>
         <UToggle v-model="currentOverflow" />
       </span>
       <span class="border p-2">
-        <p class="text-lg">Dynamic generated: {{ dynamic ? "true" : "false" }}</p>
+        <p class="text-lg">Dynamic generated: {{ dynamic }}</p>
         <UButton @click="generateDynamic">Reload</UButton>
       </span>
     </div>
@@ -74,7 +63,8 @@ onMounted(async () => {
       <UButton v-ripple class="p-4">BUTTON</UButton>
     </div>
     <hr class="my-4 border-1 border-black">
-    <p class="text-3xl py-2">Override using data attributes</p>
+    <p class="text-3xl py-2">Override global config</p>
+    <p class="text-lg">Passing an object with custom options to <b>v-ripple</b> directive</p>
     <div class="flex flex-wrap gap-4">
       <span>
         <p class="text-lg">color: string</p>

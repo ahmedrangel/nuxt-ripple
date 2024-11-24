@@ -1,12 +1,25 @@
 import type { NuxtRippleRuntimeOptions } from '../../types'
 import { useNuxtApp } from '#app'
 
-export function useRipple(config?: Partial<NuxtRippleRuntimeOptions>): Readonly<NuxtRippleRuntimeOptions> {
+export const useRipple = () => {
   const { $ripple } = useNuxtApp()
-  if (!import.meta.client) return $ripple.state.value
-  const state = $ripple.state.value
-  if (!config) return state
-  const newConfig = Object.assign(state, config)
-  $ripple.mount(newConfig)
-  return state
+  const rippleConfig = {
+    mode: $ripple.mode,
+    color: $ripple.color,
+    duration: $ripple.duration,
+    scale: $ripple.scale,
+    overflow: $ripple.overflow,
+    pulseSpeed: $ripple.pulseSpeed,
+  }
+
+  const updateRippleConfig = (config: Partial<NuxtRippleRuntimeOptions>) => {
+    const newConfig = Object.assign($ripple.state.value, config)
+    $ripple.mount(newConfig)
+  }
+
+  if (import.meta.server) {
+    updateRippleConfig($ripple.state.value)
+  }
+
+  return { ...rippleConfig, updateRippleConfig }
 }
