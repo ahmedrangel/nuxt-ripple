@@ -14,7 +14,6 @@ class Ripple {
   scale: ComputedRef<NuxtRippleRuntimeOptions['scale']>
   pulseSpeed: ComputedRef<NuxtRippleRuntimeOptions['pulseSpeed']>
   overflow: ComputedRef<NuxtRippleRuntimeOptions['overflow']>
-  clear: boolean
   constructor() {
     this.state = ref(useAppConfig().ripple as NuxtRippleRuntimeOptions)
     this.listeners = new Map<HTMLElement, (e: Event) => void>()
@@ -25,7 +24,6 @@ class Ripple {
     this.scale = computed(() => this.state.value.scale)
     this.pulseSpeed = computed(() => this.state.value.pulseSpeed)
     this.overflow = computed(() => this.state.value.overflow)
-    this.clear = false
   }
 
   mount(config?: NuxtRippleRuntimeOptions) {
@@ -38,19 +36,6 @@ class Ripple {
       modeHandler(el, this.state.value, this.listeners, this.intervals)
     }
   }
-
-  clearRipples() {
-    if (!import.meta.client) return
-    this.clear = true
-    const selector = document.querySelectorAll<HTMLElement>('.nuxt-ripple')
-    for (const el of selector) {
-      unmountListeners(el, this.listeners, this.intervals)
-      el.classList.remove('nuxt-ripple-pulse')
-      el.classList.remove('nuxt-ripple-ripple')
-      this.listeners.delete(el)
-      this.intervals.delete(el)
-    }
-  }
 }
 
 export default defineNuxtPlugin((nuxtApp) => {
@@ -58,10 +43,6 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.hook('app:mounted', () => {
     ripple.mount()
     useMutationObserver(document.body, () => {
-      if (ripple.clear) {
-        ripple.clear = false
-        return
-      }
       ripple.mount()
     }, { childList: true, subtree: true })
   })
