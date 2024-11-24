@@ -15,7 +15,7 @@ const toHex = (value: string) => {
 
 const randomColor = ref(color)
 const currentMode = ref(mode)
-const currentColor = ref(toHex(color))
+const currentColor = ref(toHex(color ?? 'white'))
 const currentOpacity = ref(1)
 const currentOverflow = ref(overflow)
 
