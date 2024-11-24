@@ -2,14 +2,14 @@ import type { RippleModes } from './types'
 
 export interface NuxtRippleRuntimeOptions {
   /**
-   * Default ripple mode
+   * Ripple mode
    *
    * @default "click"
    */
   mode: RippleModes
 
   /**
-   * Default ripple color
+   * Ripple color
    *
    * Accepts HEX, RGB or RGBA Values. Use RGBA with low opacity to create a transparent ripple
    *
@@ -19,7 +19,7 @@ export interface NuxtRippleRuntimeOptions {
   color: string
 
   /**
-   * Default ripple duration
+   * Ripple duration
    *
    * Propagation duration in miliseconds
    *
@@ -28,14 +28,14 @@ export interface NuxtRippleRuntimeOptions {
   duration: number
 
   /**
-   * Default ripple scale
+   * Ripple scale
    *
    * @default 1
    */
   scale: number
 
   /**
-   * Default ripple overflow behavior
+   * Ripple overflow behavior
    *
    * If false the ripple will not propagate outside the element; otherwise it will propagate outside the element
    *
@@ -44,7 +44,7 @@ export interface NuxtRippleRuntimeOptions {
   overflow: boolean
 
   /**
-   * Default ripple pulse interval speed
+   * Ripple pulse interval speed
    *
    * Require "pulse" mode enabled. Pulse interval speed in miliseconds
    *

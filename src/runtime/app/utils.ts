@@ -71,7 +71,7 @@ export const modeHandler = (el: HTMLElement, config: NuxtRippleRuntimeOptions, l
   if (listeners.has(el)) return
   el.classList.remove('nuxt-ripple-pulse')
   const rippleMode = el.getAttribute('data-ripple-mode') as RippleDataAttributes['data-ripple-mode']
-  const ripplePulseSpeed = Number(el.getAttribute('data-ripple-pulse-speed') as RippleDataAttributes['data-ripple-pulse-speed']) || config.pulseSpeed || 1000
+  const ripplePulseSpeed = Number(el.getAttribute('data-ripple-pulseSpeed') as RippleDataAttributes['data-ripple-pulseSpeed']) || config.pulseSpeed || 1000
   const rippleOverflow = el.getAttribute('data-ripple-overflow') as RippleDataAttributes['data-ripple-overflow']
   const rippleColor = el.getAttribute('data-ripple-color') as RippleDataAttributes['data-ripple-color'] || config.color || 'white'
   const eventHandler = (e: Event) => animationHandler(e as MouseEvent | TouchEvent, el, config)

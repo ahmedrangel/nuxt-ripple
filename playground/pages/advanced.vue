@@ -25,7 +25,7 @@ watchEffect(() => {
   useRipple({
     mode: currentMode.value,
     color: toRGBA(currentColor.value, currentOpacity.value),
-    overflow: currentOverflow.value
+    overflow: currentOverflow.value,
   })
 })
 
@@ -77,40 +77,40 @@ onMounted(async () => {
     <p class="text-3xl py-2">Override using data attributes</p>
     <div class="flex flex-wrap gap-4">
       <span>
-        <p class="text-2xl">data-ripple-color</p>
+        <p class="text-lg">color: string</p>
         <div class="flex gap-2 py-2">
-          <UButton v-ripple :data-ripple-color="toRGBA('green')" class="p-4">GREEN</UButton>
-          <UButton v-ripple :data-ripple-color="toRGBA('red')" class="p-4">RED</UButton>
-          <UButton v-ripple :data-ripple-color="toRGBA(randomColor)" class="p-4" @click="randomColor = getRandomColor()">RANDOM</UButton>
+          <UButton v-ripple="{ color: toRGBA('green') }" class="p-4">GREEN</UButton>
+          <UButton v-ripple="{ color: toRGBA('red') }" class="p-4">RED</UButton>
+          <UButton v-ripple="{ color: toRGBA(randomColor) }" class="p-4" @click="randomColor = getRandomColor()">RANDOM</UButton>
         </div>
       </span>
       <span>
-        <p class="text-2xl">data-ripple-mode</p>
+        <p class="text-lg">mode: 'click' | 'hover' | 'pulse'</p>
         <div class="flex gap-2 py-2">
-          <UButton v-ripple data-ripple-mode="click" class="p-4">CLICK</UButton>
-          <UButton v-ripple data-ripple-mode="hover" class="p-4">HOVER</UButton>
-          <UButton v-ripple data-ripple-mode="pulse" class="p-4">PULSE</UButton>
+          <UButton v-ripple="{ mode: 'click' }" class="p-4">CLICK</UButton>
+          <UButton v-ripple="{ mode: 'hover' }" class="p-4">HOVER</UButton>
+          <UButton v-ripple="{ mode: 'pulse' }" class="p-4">PULSE</UButton>
         </div>
       </span>
       <span>
-        <p class="text-2xl">data-ripple-overflow</p>
+        <p class="text-lg">overflow: boolean</p>
         <div class="flex gap-2 py-2">
-          <UButton v-ripple data-ripple-overflow="false" class="p-4">FALSE</UButton>
-          <UButton v-ripple data-ripple-overflow="true" class="p-4">TRUE</UButton>
+          <UButton v-ripple="{ overflow: false }" class="p-4">FALSE</UButton>
+          <UButton v-ripple="{ overflow: true }" class="p-4">TRUE</UButton>
         </div>
       </span>
     </div>
-    <p class="text-2xl">Override multiple attributes</p>
+    <p class="text-lg">Override multiple attributes</p>
     <div class="flex flex-wrap gap-2 py-2">
-      <UButton v-ripple :data-ripple-color="toRGBA('red')" data-ripple-mode="hover" class="p-4">COLOR (red) + MODE (hover)</UButton>
-      <UButton v-ripple :data-ripple-color="toRGBA('yellow')" data-ripple-mode="pulse" data-ripple-pulse-speed="2000" class="p-4">COLOR (yellow) + MODE (pulse) + PULSESPEED (200ms)</UButton>
+      <UButton v-ripple="{ mode: 'hover', color: toRGBA('red') }" class="p-4">{ mode: 'hover', color: 'red' }</UButton>
+      <UButton v-ripple="{ mode: 'pulse', color: toRGBA('yellow'), pulseSpeed: 2000 }" class="p-4">{ mode: 'pulse', color: 'yellow', pulseSpeed: 2000 }</UButton>
     </div>
     <hr class="my-4 border-1 border-black">
     <p class="text-3xl">Dynamically generated</p>
     <div v-if="dynamic" class="flex gap-2 py-2">
-      <UButton v-ripple data-ripple-mode="click" class="p-4">MODE (click)</UButton>
-      <UButton v-ripple data-ripple-mode="hover" class="p-4">HOVER</UButton>
-      <UButton v-ripple :data-ripple-color="toRGBA('blue')" data-ripple-mode="pulse" data-ripple-overflow="true" class="p-4">BLUE + PULSE + OVERFLOW TRUE</UButton>
+      <UButton v-ripple="{ mode: 'click' }" class="p-4">MODE (click)</UButton>
+      <UButton v-ripple="{ mode: 'hover' }" class="p-4">HOVER</UButton>
+      <UButton v-ripple="{ mode: 'pulse', color: toRGBA('blue'), overflow: true }" class="p-4">BLUE + PULSE + OVERFLOW TRUE</UButton>
     </div>
     <div v-else>
       loading...

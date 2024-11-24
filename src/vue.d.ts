@@ -1,10 +1,9 @@
-import type { RippleDataAttributes, RippleDataProps } from './types'
+import type { ObjectDirective } from 'vue'
+import type { RippleDirectiveOptions } from './types'
 
 declare module 'vue' {
-  interface HTMLAttributes extends RippleDataAttributes {}
-  interface ComponentCustomProps extends RippleDataProps {}
   interface GlobalDirectives {
-    vRipple: boolean
+    vRipple: ObjectDirective<HTMLElement, Partial<RippleDirectiveOptions>>
   }
 }
 

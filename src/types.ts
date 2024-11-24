@@ -12,16 +12,16 @@ type Booleanish = boolean | 'true' | 'false'
 export interface RippleDataAttributes {
   'data-ripple-mode'?: RippleModes
   'data-ripple-color'?: string
-  'data-ripple-pulse-speed'?: number | string
+  'data-ripple-pulseSpeed'?: number | string
   'data-ripple-overflow'?: Booleanish
   'data-ripple-scale'?: number | string
 }
 
-export interface RippleDataProps {
-  dataRippleMode?: RippleDataAttributes['data-ripple-mode']
-  dataRippleColor?: RippleDataAttributes['data-ripple-color']
-  dataRipplePulseSpeed?: RippleDataAttributes['data-ripple-pulse-speed']
-  dataRippleOverflow?: RippleDataAttributes['data-ripple-overflow']
+export interface RippleDirectiveOptions {
+  mode?: NuxtRippleRuntimeOptions['mode']
+  color?: NuxtRippleRuntimeOptions['color']
+  pulseSpeed?: NuxtRippleRuntimeOptions['pulseSpeed']
+  overflow?: NuxtRippleRuntimeOptions['overflow']
 }
 
 export interface CssTextBuilder {
