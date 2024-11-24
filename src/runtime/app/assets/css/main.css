@@ -4,7 +4,6 @@
 
 .nuxt-ripple:before {
   content: '';
-  background-color: var(--nuxt-ripple-background-color);
   position: absolute;
   display: block;     
   border-radius: 100%;

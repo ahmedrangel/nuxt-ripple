@@ -9,7 +9,7 @@ export const useRipple = () => {
     duration: $ripple.duration,
     scale: $ripple.scale,
     overflow: $ripple.overflow,
-    pulseSpeed: $ripple.pulseSpeed,
+    pulseInterval: $ripple.pulseInterval,
   }
 
   const updateRippleConfig = (config: Partial<NuxtRippleRuntimeOptions>) => {

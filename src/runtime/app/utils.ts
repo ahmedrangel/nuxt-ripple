@@ -6,10 +6,10 @@ enum RippleEvent {
   TRANSITION_END = 'transitionend',
 }
 
-const cssTextBuilder = (options: CssTextBuilder) =>
-  Object.entries(options).filter(([_, value]) => value !== undefined)
-    .map(([key, value]) => `${key === 'color' ? '--nuxt-ripple-background-color' : key}: ${value};`)
-    .join('')
+const cssTextBuilder = (options: CssTextBuilder) => Object.entries(options)
+  .filter(([_, value]) => value !== undefined)
+  .map(([key, value]) => `${key}: ${value};`)
+  .join('')
 
 const applyEffects = (el: HTMLElement, styles: CssTextBuilder, endTransition?: boolean) => {
   el.style.cssText = cssTextBuilder(styles)
@@ -21,8 +21,11 @@ export const addHeadStyles = (config: NuxtRippleRuntimeOptions) => {
   const styleId = 'nuxt-ripple-styles'
   const styleContent = `.nuxt-ripple{overflow: ${config.overflow === true ? 'visible' : 'hidden'};}`
     + `.nuxt-ripple:before{`
-    + `transition: calc(var(--t, 0) * ${config.duration || 350}ms) linear;`
-    + `transform: translate(-50%, -50%) scale(var(--s, ${config.scale || 1}));}`
+    + `background-color: var(--nuxt-ripple-background-color, ${config.color});`
+    + `transition: calc(var(--t, 0) * var(--nuxt-ripple-duration, ${config.duration}ms)) linear;`
+    + `transform: translate(-50%, -50%) scale(var(--s, ${config.scale}));}`
+    + `.nuxt-ripple-pulse:before{`
+    + `background-color: var(--nuxt-ripple-background-color, ${config.color});}`
   const rippeStyles = document.getElementById(styleId)
   if (!rippeStyles) {
     const addStyle = document.createElement('style')
@@ -35,18 +38,27 @@ export const addHeadStyles = (config: NuxtRippleRuntimeOptions) => {
   }
 }
 
-export const animationHandler = (e: MouseEvent | TouchEvent, el: HTMLElement, config: NuxtRippleRuntimeOptions) => {
+export const animationHandler = (e: MouseEvent | TouchEvent, el: HTMLElement) => {
   const { clientX, clientY } = (e as TouchEvent).touches?.[0] || (e as MouseEvent)
   const { left, top, width, height } = el.getBoundingClientRect()
-  const rippleColor = el.getAttribute('data-ripple-color') as RippleDataAttributes['data-ripple-color'] || config.color || 'white'
+
+  const rippleColor = el.getAttribute('data-ripple-color') as RippleDataAttributes['data-ripple-color']
   const rippleOverflow = el.getAttribute('data-ripple-overflow') as RippleDataAttributes['data-ripple-overflow']
-  applyEffects(el, { 'color': rippleColor, '--s': 0, '--o': 1 })
+  const rippleDuration = el.getAttribute('data-ripple-duration') as RippleDataAttributes['data-ripple-duration']
+
+  applyEffects(el, {
+    '--s': 0,
+    '--o': 1,
+    ...rippleColor ? { '--nuxt-ripple-background-color': rippleColor } : {},
+  })
   applyEffects(el, {
     '--t': 1,
     '--o': 0,
     '--d': Math.sqrt(width ** 2 + height ** 2) * 2,
     '--x': clientX - left,
     '--y': clientY - top,
+    ...rippleColor ? { '--nuxt-ripple-background-color': rippleColor } : {},
+    ...rippleDuration ? { '--nuxt-ripple-duration': String(rippleDuration) + 'ms' } : {},
     ...rippleOverflow === 'true' || rippleOverflow === true ? { overflow: 'visible' } : rippleOverflow === 'false' || rippleOverflow === false ? { overflow: 'hidden' } : {},
   }, true)
 }
@@ -70,11 +82,13 @@ export const unmountListeners = (el: HTMLElement, listeners: Listeners, interval
 export const modeHandler = (el: HTMLElement, config: NuxtRippleRuntimeOptions, listeners: Listeners, intervals: Intervals) => {
   if (listeners.has(el)) return
   el.classList.remove('nuxt-ripple-pulse')
+
   const rippleMode = el.getAttribute('data-ripple-mode') as RippleDataAttributes['data-ripple-mode']
-  const ripplePulseSpeed = Number(el.getAttribute('data-ripple-pulseSpeed') as RippleDataAttributes['data-ripple-pulseSpeed']) || config.pulseSpeed || 1000
+  const ripplepulseInterval = Number(el.getAttribute('data-ripple-pulseInterval') as RippleDataAttributes['data-ripple-pulseInterval']) || config.pulseInterval
   const rippleOverflow = el.getAttribute('data-ripple-overflow') as RippleDataAttributes['data-ripple-overflow']
-  const rippleColor = el.getAttribute('data-ripple-color') as RippleDataAttributes['data-ripple-color'] || config.color || 'white'
-  const eventHandler = (e: Event) => animationHandler(e as MouseEvent | TouchEvent, el, config)
+  const rippleColor = el.getAttribute('data-ripple-color') as RippleDataAttributes['data-ripple-color']
+
+  const eventHandler = (e: Event) => animationHandler(e as MouseEvent | TouchEvent, el)
   if ((config.mode === 'hover' && !rippleMode) || rippleMode === 'hover') {
     el.addEventListener(RippleEvent.HOVER, eventHandler)
     listeners.set(el, eventHandler)
@@ -83,14 +97,19 @@ export const modeHandler = (el: HTMLElement, config: NuxtRippleRuntimeOptions, l
     el.classList.add('nuxt-ripple-pulse')
     intervals.set(el, setInterval(() => {
       const { width, height } = el.getBoundingClientRect()
-      applyEffects(el, { 'color': rippleColor, '--s': 0, '--o': 1 })
+      applyEffects(el, {
+        '--s': 0,
+        '--o': 1,
+        ...rippleColor ? { '--nuxt-ripple-background-color': rippleColor } : {},
+      })
       applyEffects(el, {
         '--t': 1,
         '--o': 0,
         '--d': Math.sqrt(width ** 2 + height ** 2) * 2,
+        ...rippleColor ? { '--nuxt-ripple-background-color': rippleColor } : {},
         ...rippleOverflow === 'true' || rippleOverflow === true ? { overflow: 'visible' } : rippleOverflow === 'false' || rippleOverflow === false ? { overflow: 'hidden' } : {},
       }, true)
-    }, ripplePulseSpeed))
+    }, ripplepulseInterval))
   }
   else {
     el.addEventListener(RippleEvent.CLICK, eventHandler)

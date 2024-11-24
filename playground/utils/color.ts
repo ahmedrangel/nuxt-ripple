@@ -1,8 +1,8 @@
 import chroma from 'color'
 
-export const toRGBA = (hex: string, aplha?: number) => {
+export const toRGBA = (hex: string, alpha?: number) => {
   const [r, g, b, a] = chroma(hex).rgb().array()
-  return `rgba(${r},${g},${b},${aplha || a || 1})`
+  return `rgba(${r},${g},${b},${alpha !== undefined && alpha >= 0 ? alpha : a || 1})`
 }
 
 export const toHex = (value: string) => {

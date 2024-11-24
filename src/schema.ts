@@ -39,11 +39,11 @@ export const schema = {
       tsType: 'boolean',
     },
   },
-  pulseSpeed: {
+  pulseInterval: {
     $default: 1000,
     $schema: {
-      title: 'Ripple pulse speed',
-      description: 'Require "pulse" mode enabled. Pulse speed in miliseconds',
+      title: 'Ripple pulse interval speed',
+      description: 'Require "pulse" mode enabled. Pulse interval speed in miliseconds',
       tsType: 'number',
     },
   },

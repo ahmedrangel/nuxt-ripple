@@ -51,5 +51,5 @@ export interface NuxtRippleRuntimeOptions {
    * @default 1000
    *
    */
-  pulseSpeed: number
+  pulseInterval: number
 }

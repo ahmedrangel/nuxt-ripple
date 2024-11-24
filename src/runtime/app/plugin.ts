@@ -12,7 +12,7 @@ class Ripple {
   color: ComputedRef<NuxtRippleRuntimeOptions['color']>
   duration: ComputedRef<NuxtRippleRuntimeOptions['duration']>
   scale: ComputedRef<NuxtRippleRuntimeOptions['scale']>
-  pulseSpeed: ComputedRef<NuxtRippleRuntimeOptions['pulseSpeed']>
+  pulseInterval: ComputedRef<NuxtRippleRuntimeOptions['pulseInterval']>
   overflow: ComputedRef<NuxtRippleRuntimeOptions['overflow']>
   constructor() {
     this.state = ref(useAppConfig().ripple as NuxtRippleRuntimeOptions)
@@ -22,7 +22,7 @@ class Ripple {
     this.color = computed(() => this.state.value.color)
     this.duration = computed(() => this.state.value.duration)
     this.scale = computed(() => this.state.value.scale)
-    this.pulseSpeed = computed(() => this.state.value.pulseSpeed)
+    this.pulseInterval = computed(() => this.state.value.pulseInterval)
     this.overflow = computed(() => this.state.value.overflow)
   }
 

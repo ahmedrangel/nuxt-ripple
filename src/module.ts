@@ -17,6 +17,7 @@ export default defineNuxtModule<ModuleOptions>({
     duration: 350,
     scale: 1,
     overflow: false,
+    pulseInterval: 1000,
   },
   setup(options, nuxt) {
     const resolver = createResolver(import.meta.url)
