@@ -77,6 +77,7 @@ export const modeHandler = (el: HTMLElement, config: NuxtRippleRuntimeOptions, l
   const eventHandler = (e: Event) => animationHandler(e as MouseEvent | TouchEvent, el, config)
   if ((config.mode === 'hover' && !rippleMode) || rippleMode === 'hover') {
     el.addEventListener(RippleEvent.HOVER, eventHandler)
+    listeners.set(el, eventHandler)
   }
   else if ((config.mode === 'pulse' && !rippleMode) || rippleMode === 'pulse') {
     el.classList.add('nuxt-ripple-pulse')
@@ -93,7 +94,6 @@ export const modeHandler = (el: HTMLElement, config: NuxtRippleRuntimeOptions, l
   }
   else {
     el.addEventListener(RippleEvent.CLICK, eventHandler)
+    listeners.set(el, eventHandler)
   }
-
-  listeners.set(el, eventHandler)
 }
