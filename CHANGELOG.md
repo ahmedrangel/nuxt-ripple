@@ -1,6 +1,25 @@
 # Changelog
 
 
+## v0.0.4
+
+[compare changes](https://github.com/ahmedrangel/nuxt-ripple/compare/v0.0.3...v0.0.4)
+
+### 🩹 Fixes
+
+- Improve effect for layouts using dataset instead of class ([a1263ca](https://github.com/ahmedrangel/nuxt-ripple/commit/a1263ca))
+- **type:** Module options type ([24c2a94](https://github.com/ahmedrangel/nuxt-ripple/commit/24c2a94))
+
+### 🏡 Chore
+
+- **playground:** Test with layout and page transition enabl ([594a3be](https://github.com/ahmedrangel/nuxt-ripple/commit/594a3be))
+- **playground:** Test with async setup ([530deda](https://github.com/ahmedrangel/nuxt-ripple/commit/530deda))
+- Lint ([2c786f5](https://github.com/ahmedrangel/nuxt-ripple/commit/2c786f5))
+
+### ❤️ Contributors
+
+- Ahmed Rangel <ahmedrangel@outlook.com>
+
 ## v0.0.3
 
 [compare changes](https://github.com/ahmedrangel/nuxt-ripple/compare/v0.0.2...v0.0.3)
