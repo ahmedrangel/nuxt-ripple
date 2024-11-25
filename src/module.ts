@@ -1,7 +1,6 @@
 import { defineNuxtModule, createResolver, addPlugin, addImports } from '@nuxt/kit'
-import { schema } from './schema'
-import type { ModuleOptions } from './types'
 import './vue.d'
+import type { ModuleOptions } from './types'
 
 export default defineNuxtModule<ModuleOptions>({
   meta: {
@@ -22,25 +21,10 @@ export default defineNuxtModule<ModuleOptions>({
   setup(options, nuxt) {
     const resolver = createResolver(import.meta.url)
 
-    // Merge options to app.config
-    const runtimeOptions = Object.fromEntries(
-      Object.entries(options)
-        .filter(([key]) => key in schema),
-    )
-
     nuxt.options.appConfig.ripple = Object.assign(
       nuxt.options.appConfig.ripple || {},
-      runtimeOptions,
+      options,
     )
-
-    // Define types for the app.config
-    nuxt.hook('schema:extend', (schemas) => {
-      schemas.push({
-        appConfig: {
-          ripple: schema,
-        },
-      })
-    })
 
     addImports({ name: 'useRipple', from: resolver.resolve('runtime/app/composables') })
     nuxt.options.css.push(resolver.resolve('./runtime/app/assets/css/main.css'))

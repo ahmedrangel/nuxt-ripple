@@ -1,5 +1,5 @@
-import type { NuxtRippleRuntimeOptions } from '../../types'
 import type { Listeners, Intervals } from './types'
+import type { NuxtRippleOptions } from '../../types'
 
 enum RippleEvent {
   CLICK = 'mousedown',
@@ -18,7 +18,7 @@ const applyEffects = (el: HTMLElement, styles: CssTextBuilder, endTransition?: b
   else void el.offsetTop
 }
 
-export const addHeadStyles = (config: NuxtRippleRuntimeOptions) => {
+export const addHeadStyles = (config: NuxtRippleOptions) => {
   const styleId = 'nuxt-ripple-styles'
   const styleContent = `[data-ripple-bound="true"]{overflow: ${config.overflow === true ? 'visible' : 'hidden'};}`
     + `[data-ripple-bound="true"]:before{`
@@ -82,7 +82,7 @@ export const unmountListeners = (el: HTMLElement, listeners: Listeners, interval
   }
 }
 
-export const modeHandler = (el: HTMLElement, config: NuxtRippleRuntimeOptions, listeners: Listeners, intervals: Intervals) => {
+export const modeHandler = (el: HTMLElement, config: NuxtRippleOptions, listeners: Listeners, intervals: Intervals) => {
   if (listeners.has(el)) return
   el.classList.remove('nuxt-ripple-pulse')
 
@@ -122,7 +122,7 @@ export const modeHandler = (el: HTMLElement, config: NuxtRippleRuntimeOptions, l
   }
 }
 
-export const setAttributes = (el: HTMLElement, values?: Partial<NuxtRippleRuntimeOptions>) => {
+export const setAttributes = (el: HTMLElement, values?: Partial<NuxtRippleOptions>) => {
   if (!values) return
   for (const [key, value] of Object.entries(values)) {
     el.setAttribute(`data-ripple-${key}`, String(value))
@@ -131,7 +131,7 @@ export const setAttributes = (el: HTMLElement, values?: Partial<NuxtRippleRuntim
 
 // Data Attributes
 interface RippleDataAttributes {
-  'data-ripple-mode'?: NuxtRippleRuntimeOptions['mode']
+  'data-ripple-mode'?: NuxtRippleOptions['mode']
   'data-ripple-color'?: string
   'data-ripple-pulseInterval'?: number | string
   'data-ripple-overflow'?: boolean | 'true' | 'false'

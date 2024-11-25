@@ -1,9 +1,9 @@
 import type { ObjectDirective } from 'vue'
-import type { NuxtRippleRuntimeOptions } from './schema-types'
+import type { NuxtRippleOptions } from './types'
 
 declare module 'vue' {
   interface GlobalDirectives {
-    vRipple: ObjectDirective<HTMLElement, Partial<NuxtRippleRuntimeOptions>>
+    vRipple: ObjectDirective<HTMLElement, Partial<NuxtRippleOptions>>
   }
 }
 

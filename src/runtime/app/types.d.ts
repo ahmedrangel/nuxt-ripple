@@ -1,5 +1,5 @@
 import type { ComputedRef } from 'vue'
-import type { NuxtRippleRuntimeOptions } from '../../types'
+import type { NuxtRippleOptions } from '../../types'
 
 // Plugin
 export type Listeners = Map<HTMLElement, (e: Event) => void>
@@ -11,6 +11,6 @@ type ToRequiredComputedRef<T> = {
 }
 
 // Composable
-export interface UseRippleReturn extends ToRequiredComputedRef<NuxtRippleRuntimeOptions> {
-  updateRippleConfig: (config: Partial<NuxtRippleRuntimeOptions>) => void
+export interface UseRippleReturn extends ToRequiredComputedRef<NuxtRippleOptions> {
+  updateRippleConfig: (config: Partial<NuxtRippleOptions>) => void
 }
