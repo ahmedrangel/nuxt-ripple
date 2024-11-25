@@ -41,14 +41,14 @@ class Ripple {
 
 export default defineNuxtPlugin((nuxtApp) => {
   const ripple = new Ripple()
-  nuxtApp.hook('app:mounted', () => {
+  nuxtApp.hook('page:finish', () => {
     ripple.mount()
     useMutationObserver(document.body, () => {
       ripple.mount()
     }, { childList: true, subtree: true })
   })
   nuxtApp.vueApp.directive<HTMLElement, Partial<NuxtRippleRuntimeOptions>>('ripple', {
-    mounted(el, binding) {
+    beforeMount(el, binding) {
       el.classList.add('nuxt-ripple')
       setAttributes(el, binding.value)
     },
