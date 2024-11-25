@@ -42,7 +42,7 @@ const gray = computed({
 
 <template>
   <UPopover mode="click">
-    <template #default="{ open }">
+    <template #default>
       <span class="p-4">&nbsp;</span>
     </template>
 
@@ -69,7 +69,6 @@ const gray = computed({
             @select="gray = color"
           />
         </div>
-
       </div>
     </template>
   </UPopover>

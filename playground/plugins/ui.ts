@@ -1,7 +1,7 @@
 import colors from '#tailwind-config/theme/colors'
 
 const rxHex = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/
-function hexToRgb (hex: string) {
+function hexToRgb(hex: string) {
   // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
   const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i
   hex = hex.replace(shorthandRegex, function (_, r, g, b) {
@@ -10,13 +10,13 @@ function hexToRgb (hex: string) {
 
   const result = rxHex.exec(hex)
   return result
-    ? `${parseInt(result[1], 16)} ${parseInt(result[2], 16)} ${parseInt(result[3], 16)}`
+    ? `${Number.parseInt(result[1], 16)} ${Number.parseInt(result[2], 16)} ${Number.parseInt(result[3], 16)}`
     : null
 }
 
 export default defineNuxtPlugin({
   enforce: 'post',
-  setup () {
+  setup() {
     const nuxtApp = useNuxtApp()
     const appConfig = useAppConfig()
     const colorMode = useColorMode()
@@ -70,10 +70,10 @@ export default defineNuxtPlugin({
                   document.querySelector('style#nuxt-ui-colors').innerHTML = localStorage.getItem('nuxt-ui-root')
                 }`.replace(/\s+/g, ' '),
             type: 'text/javascript',
-            tagPriority: -1
-          }
-        ]
+            tagPriority: -1,
+          },
+        ],
       })
     }
-  }
+  },
 })

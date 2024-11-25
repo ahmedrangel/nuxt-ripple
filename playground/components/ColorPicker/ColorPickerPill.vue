@@ -2,9 +2,9 @@
 <script setup lang="ts">
 defineProps<{
   color: {
-    value: string,
+    value: string
     hex: string
-  },
+  }
   selected: { value: string }
 }>()
 defineEmits(['select'])

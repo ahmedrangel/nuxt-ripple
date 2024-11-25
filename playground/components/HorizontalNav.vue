@@ -2,7 +2,7 @@
 const colorMode = useColorMode()
 const dark = computed({
   get: () => colorMode.value === 'dark',
-  set: () => colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
+  set: () => colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark',
 })
 
 const icons = { sun: 'ph:sun-duotone', moon: 'ph:moon-duotone' }
@@ -13,7 +13,7 @@ const nav = ref<{ label: string, to?: string, icon?: string, click?: () => void 
   { label: 'With Layout', to: '/with-layout' },
 ], [
   { label: '', icon: 'heroicons:paint-brush-20-solid' },
-    { label: '', icon: '', click: () => dark.value = !dark.value },
+  { label: '', icon: '', click: () => dark.value = !dark.value },
 ]])
 
 onMounted(() => {

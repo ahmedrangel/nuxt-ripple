@@ -5,8 +5,8 @@ export default <Partial<Config>>{
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Public Sans', ...defaultTheme.fontFamily.sans]
-      }
-    }
-  }
+        sans: ['Public Sans', ...defaultTheme.fontFamily.sans],
+      },
+    },
+  },
 }
