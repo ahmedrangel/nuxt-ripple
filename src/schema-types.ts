@@ -1,12 +1,10 @@
-import type { RippleModes } from './types'
-
 export interface NuxtRippleRuntimeOptions {
   /**
    * Ripple mode
    *
    * @default "click"
    */
-  mode: RippleModes
+  mode: 'click' | 'hover' | 'pulse'
 
   /**
    * Ripple color

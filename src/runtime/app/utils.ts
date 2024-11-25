@@ -1,4 +1,5 @@
-import type { Intervals, Listeners, NuxtRippleRuntimeOptions, RippleDataAttributes, CssTextBuilder, RippleDirectiveOptions } from '../../types'
+import type { NuxtRippleRuntimeOptions } from '../../types'
+import type { Listeners, Intervals } from './types'
 
 enum RippleEvent {
   CLICK = 'mousedown',
@@ -45,6 +46,7 @@ export const animationHandler = (e: MouseEvent | TouchEvent, el: HTMLElement) =>
   const rippleColor = el.getAttribute('data-ripple-color') as RippleDataAttributes['data-ripple-color']
   const rippleOverflow = el.getAttribute('data-ripple-overflow') as RippleDataAttributes['data-ripple-overflow']
   const rippleDuration = el.getAttribute('data-ripple-duration') as RippleDataAttributes['data-ripple-duration']
+  const rippleScale = el.getAttribute('data-ripple-scale') as RippleDataAttributes['data-ripple-scale']
 
   applyEffects(el, {
     '--s': 0,
@@ -57,6 +59,7 @@ export const animationHandler = (e: MouseEvent | TouchEvent, el: HTMLElement) =>
     '--d': Math.sqrt(width ** 2 + height ** 2) * 2,
     '--x': clientX - left,
     '--y': clientY - top,
+    ...rippleScale ? { '--s': Number(rippleScale) } : {},
     ...rippleColor ? { '--nuxt-ripple-background-color': rippleColor } : {},
     ...rippleDuration ? { '--nuxt-ripple-duration': String(rippleDuration) + 'ms' } : {},
     ...rippleOverflow === 'true' || rippleOverflow === true ? { overflow: 'visible' } : rippleOverflow === 'false' || rippleOverflow === false ? { overflow: 'hidden' } : {},
@@ -87,6 +90,7 @@ export const modeHandler = (el: HTMLElement, config: NuxtRippleRuntimeOptions, l
   const ripplepulseInterval = Number(el.getAttribute('data-ripple-pulseInterval') as RippleDataAttributes['data-ripple-pulseInterval']) || config.pulseInterval
   const rippleOverflow = el.getAttribute('data-ripple-overflow') as RippleDataAttributes['data-ripple-overflow']
   const rippleColor = el.getAttribute('data-ripple-color') as RippleDataAttributes['data-ripple-color']
+  const rippleScale = el.getAttribute('data-ripple-scale') as RippleDataAttributes['data-ripple-scale']
 
   const eventHandler = (e: Event) => animationHandler(e as MouseEvent | TouchEvent, el)
   if ((config.mode === 'hover' && !rippleMode) || rippleMode === 'hover') {
@@ -106,6 +110,7 @@ export const modeHandler = (el: HTMLElement, config: NuxtRippleRuntimeOptions, l
         '--t': 1,
         '--o': 0,
         '--d': Math.sqrt(width ** 2 + height ** 2) * 2,
+        ...rippleScale ? { '--s': Number(rippleScale) } : {},
         ...rippleColor ? { '--nuxt-ripple-background-color': rippleColor } : {},
         ...rippleOverflow === 'true' || rippleOverflow === true ? { overflow: 'visible' } : rippleOverflow === 'false' || rippleOverflow === false ? { overflow: 'hidden' } : {},
       }, true)
@@ -117,9 +122,32 @@ export const modeHandler = (el: HTMLElement, config: NuxtRippleRuntimeOptions, l
   }
 }
 
-export const setAttributes = (el: HTMLElement, values?: Partial<RippleDirectiveOptions>) => {
+export const setAttributes = (el: HTMLElement, values?: Partial<NuxtRippleRuntimeOptions>) => {
   if (!values) return
   for (const [key, value] of Object.entries(values)) {
     el.setAttribute(`data-ripple-${key}`, String(value))
   }
+}
+
+// Data Attributes
+interface RippleDataAttributes {
+  'data-ripple-mode'?: NuxtRippleRuntimeOptions['mode']
+  'data-ripple-color'?: string
+  'data-ripple-pulseInterval'?: number | string
+  'data-ripple-overflow'?: boolean | 'true' | 'false'
+  'data-ripple-scale'?: number | string
+  'data-ripple-duration'?: string
+}
+
+// CSS variables
+interface CssTextBuilder {
+  '--t'?: number
+  '--o'?: number
+  '--d'?: number
+  '--x'?: number
+  '--y'?: number
+  '--s'?: number
+  '--nuxt-ripple-background-color'?: string
+  '--nuxt-ripple-duration'?: string
+  'overflow'?: string
 }

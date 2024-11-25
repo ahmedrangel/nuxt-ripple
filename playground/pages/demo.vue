@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import chroma from 'color'
 
-const { color, mode, overflow, updateRippleConfig } = useRipple()
+const { color, mode, overflow, scale, updateRippleConfig } = useRipple()
 
 const currentMode = ref(mode.value)
 const currentColor = ref(toHex(color.value))
 const currentOpacity = ref(chroma(color.value).rgb().alpha())
 const currentOverflow = ref(overflow.value)
+const currentScale = ref(scale.value)
 const randomColor = ref(color.value)
 const dynamic = ref(false)
 
@@ -15,6 +16,7 @@ watchEffect(() => {
     mode: currentMode.value,
     color: toRGBA(currentColor.value, currentOpacity.value),
     overflow: currentOverflow.value,
+    scale: currentScale.value,
   })
 })
 
@@ -36,25 +38,29 @@ onMounted(async () => {
     <p>Using <b>updateRippleConfig({ ...options })</b> method from <b>useRipple()</b> composable to mutate the default configs</p>
     <div class="flex flex-wrap gap-2">
       <span class="border p-2">
-        <p class="text-lg">Mode: {{ currentMode }}</p>
+        <p class="text-md">Mode: {{ currentMode }}</p>
         <USelect v-model="currentMode" :options="['click', 'hover', 'pulse']" />
       </span>
       <span class="border p-2 flex gap-4">
         <div>
-          <p class="text-lg">Color: {{ chroma(currentColor).rgb().array() }}</p>
+          <p class="text-md">Color: {{ chroma(currentColor).rgb().array() }}</p>
           <input v-model="currentColor" type="color" style="width: 90px; height: 36px;">
         </div>
         <div>
-          <p class="text-lg">Alpha: {{ currentOpacity }}</p>
+          <p class="text-md">Alpha: {{ currentOpacity }}</p>
           <URange v-model="currentOpacity" :min="0" :max="1" :step="0.1" />
         </div>
       </span>
       <span class="border p-2">
-        <p class="text-lg">Overflow: {{ currentOverflow }}</p>
+        <p class="text-md">Overflow: {{ currentOverflow }}</p>
         <UToggle v-model="currentOverflow" />
       </span>
+      <span class="border p-2 w-40">
+        <p class="text-md">Scale: {{ currentScale }}</p>
+        <URange v-model="currentScale" :min="0" :max="5" :step="0.1" class="w-30" />
+      </span>
       <span class="border p-2">
-        <p class="text-lg">Dynamic generated: {{ dynamic }}</p>
+        <p class="text-md">Dynamic generated: {{ dynamic }}</p>
         <UButton @click="generateDynamic">Reload</UButton>
       </span>
     </div>
@@ -96,6 +102,13 @@ onMounted(async () => {
         <div class="flex gap-2 py-2">
           <UButton v-ripple="{ duration: 1000 }" class="p-4">1000 (ms)</UButton>
           <UButton v-ripple="{ duration: 3000 }" class="p-4">3000 (ms)</UButton>
+        </div>
+      </span>
+      <span>
+        <p class="text-lg"><b>Scale:</b> number</p>
+        <div class="flex gap-2 py-2">
+          <UButton v-ripple="{ scale: 1 }" class="p-4">1</UButton>
+          <UButton v-ripple="{ scale: 3 }" class="p-4">3</UButton>
         </div>
       </span>
     </div>

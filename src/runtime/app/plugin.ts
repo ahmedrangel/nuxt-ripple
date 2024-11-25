@@ -1,19 +1,20 @@
 import { useMutationObserver } from '@vueuse/core'
-import { computed, ref, type ComputedRef, type Ref } from 'vue'
-import type { Intervals, Listeners, NuxtRippleRuntimeOptions, RippleDirectiveOptions } from '../../types'
+import { computed, ref, type Ref } from 'vue'
+import type { NuxtRippleRuntimeOptions } from '../../types'
 import { addHeadStyles, unmountListeners, modeHandler, setAttributes } from './utils'
+import type { Listeners, Intervals, UseRippleReturn } from './types'
 import { defineNuxtPlugin, useAppConfig } from '#app'
 
 class Ripple {
   state: Ref<NuxtRippleRuntimeOptions>
   listeners: Listeners
   intervals: Intervals
-  mode: ComputedRef<NuxtRippleRuntimeOptions['mode']>
-  color: ComputedRef<NuxtRippleRuntimeOptions['color']>
-  duration: ComputedRef<NuxtRippleRuntimeOptions['duration']>
-  scale: ComputedRef<NuxtRippleRuntimeOptions['scale']>
-  pulseInterval: ComputedRef<NuxtRippleRuntimeOptions['pulseInterval']>
-  overflow: ComputedRef<NuxtRippleRuntimeOptions['overflow']>
+  mode: UseRippleReturn['mode']
+  color: UseRippleReturn['color']
+  duration: UseRippleReturn['duration']
+  scale: UseRippleReturn['scale']
+  pulseInterval: UseRippleReturn['pulseInterval']
+  overflow: UseRippleReturn['overflow']
   constructor() {
     this.state = ref(useAppConfig().ripple as NuxtRippleRuntimeOptions)
     this.listeners = new Map<HTMLElement, (e: Event) => void>()
@@ -46,7 +47,7 @@ export default defineNuxtPlugin((nuxtApp) => {
       ripple.mount()
     }, { childList: true, subtree: true })
   })
-  nuxtApp.vueApp.directive<HTMLElement, Partial<RippleDirectiveOptions>>('ripple', {
+  nuxtApp.vueApp.directive<HTMLElement, Partial<NuxtRippleRuntimeOptions>>('ripple', {
     mounted(el, binding) {
       el.classList.add('nuxt-ripple')
       setAttributes(el, binding.value)

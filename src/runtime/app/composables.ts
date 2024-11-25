@@ -1,17 +1,9 @@
 import type { NuxtRippleRuntimeOptions } from '../../types'
+import type { UseRippleReturn } from './types'
 import { useNuxtApp } from '#app'
 
-export const useRipple = () => {
+export const useRipple = (): UseRippleReturn => {
   const { $ripple } = useNuxtApp()
-  const rippleConfig = {
-    mode: $ripple.mode,
-    color: $ripple.color,
-    duration: $ripple.duration,
-    scale: $ripple.scale,
-    overflow: $ripple.overflow,
-    pulseInterval: $ripple.pulseInterval,
-  }
-
   const updateRippleConfig = (config: Partial<NuxtRippleRuntimeOptions>) => {
     const newConfig = Object.assign($ripple.state.value, config)
     $ripple.mount(newConfig)
@@ -21,5 +13,15 @@ export const useRipple = () => {
     updateRippleConfig($ripple.state.value)
   }
 
-  return { ...rippleConfig, updateRippleConfig }
+  const { mode, color, duration, scale, overflow, pulseInterval } = $ripple
+
+  return {
+    mode,
+    color,
+    duration,
+    scale,
+    overflow,
+    pulseInterval,
+    updateRippleConfig,
+  }
 }
