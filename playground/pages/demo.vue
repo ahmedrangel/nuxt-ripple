@@ -33,15 +33,15 @@ onMounted(async () => {
 </script>
 
 <template>
-  <main class="container mx-auto py-5 px-2 overflow-hidden">
-    <p class="text-3xl mb-2">Global settings</p>
-    <p>Using <b>updateRippleConfig({ ...options })</b> method from <b>useRipple()</b> composable to mutate the default configs</p>
+  <main>
+    <p class="text-2xl">Global settings</p>
+    <p class="mb-3">Using <b>updateRippleConfig({ ...options })</b> method from <b>useRipple()</b> composable to mutate the default configs</p>
     <div class="flex flex-wrap gap-2">
-      <span class="border p-2">
+      <span class="border rounded p-2 border-gray-300 dark:border-gray-600">
         <p class="text-md">Mode: {{ currentMode }}</p>
         <USelect v-model="currentMode" :options="['click', 'hover', 'pulse']" />
       </span>
-      <span class="border p-2 flex gap-4">
+      <span class="border rounded p-2 flex gap-4 border-gray-300 dark:border-gray-600">
         <div>
           <p class="text-md">Color: {{ chroma(currentColor).rgb().array() }}</p>
           <input v-model="currentColor" type="color" style="width: 90px; height: 36px;">
@@ -51,27 +51,27 @@ onMounted(async () => {
           <URange v-model="currentOpacity" :min="0" :max="1" :step="0.1" />
         </div>
       </span>
-      <span class="border p-2">
+      <span class="border rounded p-2 border-gray-300 dark:border-gray-600">
         <p class="text-md">Overflow: {{ currentOverflow }}</p>
         <UToggle v-model="currentOverflow" />
       </span>
-      <span class="border p-2 w-40">
+      <span class="border rounded p-2 w-40 border-gray-300 dark:border-gray-600">
         <p class="text-md">Scale: {{ currentScale }}</p>
         <URange v-model="currentScale" :min="0" :max="5" :step="0.1" class="w-30" />
       </span>
-      <span class="border p-2">
+      <span class="border rounded p-2 border-gray-300 dark:border-gray-600">
         <p class="text-md">Dynamic generated: {{ dynamic }}</p>
         <UButton @click="generateDynamic">Reload</UButton>
       </span>
     </div>
-    <hr class="my-4 border-1 border-black">
-    <p class="text-3xl">Globally affected</p>
+    <hr class="my-4 border-1 border-gray-300 dark:border-gray-600">
+    <p class="text-2xl">Globally affected</p>
     <div class="flex flex-wrap gap-2 py-2">
       <UButton v-ripple class="p-4">BUTTON</UButton>
       <UButton v-ripple class="p-4">BUTTON</UButton>
     </div>
-    <hr class="my-4 border-1 border-black">
-    <p class="text-3xl py-2">Override global config</p>
+    <hr class="my-4 border-1 border-gray-300 dark:border-gray-600">
+    <p class="text-2xl py-2">Overriding global config</p>
     <p class="text-lg">Passing an object with custom options to <b>v-ripple</b> directive</p>
     <div class="flex flex-wrap gap-4">
       <span>
@@ -112,13 +112,13 @@ onMounted(async () => {
         </div>
       </span>
     </div>
-    <p class="text-lg">Override multiple attributes</p>
+    <p class="text-lg">Overriding multiple settings</p>
     <div class="flex flex-wrap gap-2 py-2">
       <UButton v-ripple="{ mode: 'hover', color: toRGBA('red', currentOpacity) }" class="p-4">{ mode: 'hover', color: 'red' }</UButton>
       <UButton v-ripple="{ mode: 'pulse', color: toRGBA('yellow', currentOpacity), pulseInterval: 2000 }" class="p-4">{ mode: 'pulse', color: 'yellow', pulseInterval: 2000 }</UButton>
     </div>
-    <hr class="my-4 border-1 border-black">
-    <p class="text-3xl">Dynamically generated</p>
+    <hr class="my-4 border-1 border-gray-300 dark:border-gray-600">
+    <p class="text-2xl">Dynamically generated</p>
     <div v-if="dynamic" class="flex gap-2 py-2">
       <UButton v-ripple="{ mode: 'click' }" class="p-4">MODE (click)</UButton>
       <UButton v-ripple="{ mode: 'hover' }" class="p-4">HOVER</UButton>
@@ -126,9 +126,6 @@ onMounted(async () => {
     </div>
     <div v-else>
       loading...
-    </div>
-    <div class="mt-4 underline">
-      <NuxtLink to="/">Go back</NuxtLink>
     </div>
   </main>
 </template>

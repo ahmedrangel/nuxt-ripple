@@ -6,8 +6,5 @@ definePageMeta({ layout: 'layout-example' })
   <main>
     <p class="text-3xl mb-4">Layout page</p>
     <UButton v-ripple class="p-10">CLICK ME!</UButton>
-    <div class="mt-4 underline">
-      <NuxtLink to="/">Go to Index</NuxtLink>
-    </div>
   </main>
 </template>

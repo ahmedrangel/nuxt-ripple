@@ -1,11 +1,21 @@
 <template>
   <NuxtLoadingIndicator />
-  <NuxtLayout>
-    <NuxtPage />
-  </NuxtLayout>
+  <div class="relative h-screen">
+    <HorizontalNav />
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
+  </div>
 </template>
 
-<style>
+<style lang="postcss">
+.light {
+  @apply bg-gray-100 text-gray-900;
+}
+.dark {
+  @apply bg-gray-900 text-gray-50;
+}
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.3s ease-in-out;
