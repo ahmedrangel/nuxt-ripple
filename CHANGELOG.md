@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v0.0.3
+
+[compare changes](https://github.com/ahmedrangel/nuxt-ripple/compare/v0.0.2...v0.0.3)
+
+### 🩹 Fixes
+
+- Plugin and directive hooks ([db21b14](https://github.com/ahmedrangel/nuxt-ripple/commit/db21b14))
+
+### 🏡 Chore
+
+- **playground:** Adjust ([e86f22d](https://github.com/ahmedrangel/nuxt-ripple/commit/e86f22d))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](http://github.com/ahmedrangel))
+
 ## v0.0.2
 
 [compare changes](https://github.com/ahmedrangel/nuxt-ripple/compare/v0.0.1...v0.0.2)
