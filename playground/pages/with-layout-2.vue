@@ -1,6 +1,6 @@
 <script setup lang="ts">
 definePageMeta({ layout: 'layout-example' })
-await new Promise((resolve) => setTimeout(resolve, 1000))
+await new Promise(resolve => setTimeout(resolve, 1000))
 </script>
 
 <template>
