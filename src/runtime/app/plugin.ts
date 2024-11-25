@@ -53,6 +53,7 @@ export default defineNuxtPlugin((nuxtApp) => {
       setAttributes(el, binding.value)
     },
     updated(el, binding) {
+      el.classList.add('nuxt-ripple')
       setAttributes(el, binding.value)
     },
     unmounted(el) {
