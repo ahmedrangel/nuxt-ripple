@@ -1,6 +1,24 @@
 # Changelog
 
 
+## v0.0.2
+
+[compare changes](https://github.com/ahmedrangel/nuxt-ripple/compare/v0.0.1...v0.0.2)
+
+### 🩹 Fixes
+
+- Ripples on layout stop working after page change ([193170a](https://github.com/ahmedrangel/nuxt-ripple/commit/193170a))
+
+### 🏡 Chore
+
+- **release:** V0.0.1 ([7be29d9](https://github.com/ahmedrangel/nuxt-ripple/commit/7be29d9))
+- **playground:** Adjust layout example ([506298a](https://github.com/ahmedrangel/nuxt-ripple/commit/506298a))
+- Lint ([bc86731](https://github.com/ahmedrangel/nuxt-ripple/commit/bc86731))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](http://github.com/ahmedrangel))
+
 ## v0.0.1
 
 
