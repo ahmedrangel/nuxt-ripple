@@ -31,7 +31,7 @@ class Ripple {
     this.state.value = config || this.state.value
     if (!import.meta.client) return
     addHeadStyles(this.state.value)
-    const selector = document.querySelectorAll<HTMLElement>('.nuxt-ripple')
+    const selector = document.querySelectorAll<HTMLElement>('[data-ripple-bound="true"]')
     for (const el of selector) {
       unmountListeners(el, this.listeners, this.intervals)
       modeHandler(el, this.state.value, this.listeners, this.intervals)
@@ -49,15 +49,13 @@ export default defineNuxtPlugin((nuxtApp) => {
   })
   nuxtApp.vueApp.directive<HTMLElement, Partial<NuxtRippleRuntimeOptions>>('ripple', {
     beforeMount(el, binding) {
-      el.classList.add('nuxt-ripple')
+      el.dataset.rippleBound = 'true'
       setAttributes(el, binding.value)
     },
     updated(el, binding) {
-      el.classList.add('nuxt-ripple')
       setAttributes(el, binding.value)
     },
     unmounted(el) {
-      el.classList.remove('nuxt-ripple')
       unmountListeners(el, ripple.listeners, ripple.intervals)
     },
     getSSRProps() {

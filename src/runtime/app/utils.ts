@@ -20,8 +20,8 @@ const applyEffects = (el: HTMLElement, styles: CssTextBuilder, endTransition?: b
 
 export const addHeadStyles = (config: NuxtRippleRuntimeOptions) => {
   const styleId = 'nuxt-ripple-styles'
-  const styleContent = `.nuxt-ripple{overflow: ${config.overflow === true ? 'visible' : 'hidden'};}`
-    + `.nuxt-ripple:before{`
+  const styleContent = `[data-ripple-bound="true"]{overflow: ${config.overflow === true ? 'visible' : 'hidden'};}`
+    + `[data-ripple-bound="true"]:before{`
     + `background-color: var(--nuxt-ripple-background-color, ${config.color});`
     + `transition: calc(var(--t, 0) * var(--nuxt-ripple-duration, ${config.duration}ms)) linear;`
     + `transform: translate(-50%, -50%) scale(var(--s, ${config.scale}));}`

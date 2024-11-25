@@ -1,8 +1,8 @@
-.nuxt-ripple {
+[data-ripple-bound="true"] {
   position: relative;
 }
 
-.nuxt-ripple:before {
+[data-ripple-bound="true"]:before {
   content: '';
   position: absolute;
   display: block;     
