@@ -1,5 +1,5 @@
-import type { Listeners, Intervals } from './types'
 import type { NuxtRippleOptions } from '../../types'
+import type { Listeners, Intervals } from './types'
 
 enum RippleEvent {
   CLICK = 'mousedown',
