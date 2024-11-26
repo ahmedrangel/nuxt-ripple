@@ -1,6 +1,24 @@
 # Changelog
 
 
+## v0.0.5
+
+[compare changes](https://github.com/ahmedrangel/nuxt-ripple/compare/v0.0.4...v0.0.5)
+
+### 💅 Refactors
+
+- **types:** Module options ([d990f11](https://github.com/ahmedrangel/nuxt-ripple/commit/d990f11))
+
+### 🏡 Chore
+
+- **playground:** Improve demo page ([2036312](https://github.com/ahmedrangel/nuxt-ripple/commit/2036312))
+- Lint ([596f4ea](https://github.com/ahmedrangel/nuxt-ripple/commit/596f4ea))
+- Lint ([646221f](https://github.com/ahmedrangel/nuxt-ripple/commit/646221f))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](http://github.com/ahmedrangel))
+
 ## v0.0.4
 
 [compare changes](https://github.com/ahmedrangel/nuxt-ripple/compare/v0.0.3...v0.0.4)
