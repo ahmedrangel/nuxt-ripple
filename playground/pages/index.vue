@@ -36,7 +36,7 @@ html.dark pre.shiki, html.dark code:not(.shiki *) {
 }
 
 table {
-  background-color: rgb(var(--color-gray-50));
+  background-color: rgb(var(--color-gray-100));
   margin: 1.5em 0;
 }
 

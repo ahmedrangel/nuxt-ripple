@@ -79,6 +79,7 @@ export default defineNuxtConfig({
 ::hr{.mb-4.mt-2.border-1.border-gray-300.dark:border-gray-600}
 ::
 
+::div{.overflow-auto}
 | Argument | Type | Description | Required |
 | --- | --- | --- | --- |
 | `mode` | `'click'`, `'hover'` or `'pulse'`  | Ripple mode. | ❌ |
@@ -87,6 +88,7 @@ export default defineNuxtConfig({
 | `overflow` | `boolean` | Ripple overflow. If false the ripple will not propagate outside the element; otherwise, it will. | ❌ |
 | `scale` | `number` | Ripple scale. | ❌ |
 | `pulseInterval` | `number` | Ripple pulse interval speed in miliseonds. Require `'pulse'` mode enabled. | ❌ |
+::
 
 ## [Override global settings for a specific element]{.text-2xl.font-bold}
 
