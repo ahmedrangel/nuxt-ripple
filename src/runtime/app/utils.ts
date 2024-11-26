@@ -14,7 +14,13 @@ const cssTextBuilder = (options: CssTextBuilder) => Object.entries(options)
 
 const applyEffects = (el: HTMLElement, styles: CssTextBuilder, endTransition?: boolean) => {
   el.style.cssText = cssTextBuilder(styles)
-  if (endTransition) el.addEventListener(RippleEvent.TRANSITION_END, () => el.removeAttribute('style'), { once: true })
+  if (endTransition) {
+    el.addEventListener(RippleEvent.TRANSITION_END, (event: TransitionEvent) => {
+      const target = event.target as HTMLElement
+      if (event.propertyName === 'opacity' && event.pseudoElement === '::before' && target.dataset.rippleBound === 'true')
+        el.removeAttribute('style')
+    }, { once: true })
+  }
   else void el.offsetTop
 }
 
