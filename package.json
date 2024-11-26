@@ -1,7 +1,7 @@
 {
   "name": "nuxt-ripple",
   "version": "0.0.5",
-  "description": "",
+  "description": "Add simple ripple effects to your elements",
   "keywords": [
     "nuxt",
     "ripple",
