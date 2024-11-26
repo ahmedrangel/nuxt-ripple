@@ -1,6 +1,32 @@
 # Changelog
 
 
+## v0.0.6
+
+[compare changes](https://github.com/ahmedrangel/nuxt-ripple/compare/v0.0.5...v0.0.6)
+
+### 🩹 Fixes
+
+- Improve mounting of handlers ([595c92a](https://github.com/ahmedrangel/nuxt-ripple/commit/595c92a))
+
+### 📖 Documentation
+
+- Improve docs and demo ([f2eae25](https://github.com/ahmedrangel/nuxt-ripple/commit/f2eae25))
+
+### 🏡 Chore
+
+- **package:** Add description ([ae059f0](https://github.com/ahmedrangel/nuxt-ripple/commit/ae059f0))
+- **playground:** Use primary emerald by default ([dd4ffc6](https://github.com/ahmedrangel/nuxt-ripple/commit/dd4ffc6))
+- **playground:** Adjust style ([6b75d0b](https://github.com/ahmedrangel/nuxt-ripple/commit/6b75d0b))
+- **playground:** Wrap codes ([f8d533f](https://github.com/ahmedrangel/nuxt-ripple/commit/f8d533f))
+- **playground:** Update icons and add github link ([d8f00ab](https://github.com/ahmedrangel/nuxt-ripple/commit/d8f00ab))
+- Lint ([2e264de](https://github.com/ahmedrangel/nuxt-ripple/commit/2e264de))
+- **playgroud:** Adjust dosc styles ([bc632a1](https://github.com/ahmedrangel/nuxt-ripple/commit/bc632a1))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](http://github.com/ahmedrangel))
+
 ## v0.0.5
 
 [compare changes](https://github.com/ahmedrangel/nuxt-ripple/compare/v0.0.4...v0.0.5)
