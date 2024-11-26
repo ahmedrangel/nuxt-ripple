@@ -28,7 +28,7 @@ html pre.shiki, html code:not(.shiki *) {
 }
 
 html.dark pre.shiki, html.dark code:not(.shiki *) {
-  background-color: rgb(var(--color-gray-900));
+  background-color: rgb(var(--color-gray-800));
 }
 
 table {
