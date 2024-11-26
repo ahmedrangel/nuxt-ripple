@@ -10,6 +10,10 @@
   color: rgb(var(--color-primary-DEFAULT) / var(--tw-text-opacity));
 }
 
+code {
+  white-space : pre-wrap;
+}
+
 code:not(.shiki *) {
   padding: 0.125em 0.50em;
 }
