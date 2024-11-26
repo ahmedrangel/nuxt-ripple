@@ -10,5 +10,9 @@
   "dependencies": {
     "nuxt": "^3.14.1592",
     "nuxt-ripple": "workspace:*"
+  },
+  "devDependencies": {
+    "@iconify-json/ph": "^1.2.1",
+    "@iconify-json/simple-icons": "^1.2.13"
   }
 }
