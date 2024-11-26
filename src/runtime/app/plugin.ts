@@ -1,4 +1,3 @@
-import { useMutationObserver } from '@vueuse/core'
 import { computed, ref, type Ref } from 'vue'
 import { addHeadStyles, unmountListeners, modeHandler, setAttributes } from './utils'
 import type { Listeners, Intervals, UseRippleReturn } from './types'
@@ -41,16 +40,16 @@ class Ripple {
 
 export default defineNuxtPlugin((nuxtApp) => {
   const ripple = new Ripple()
-  nuxtApp.hook('page:finish', () => {
+  nuxtApp.hook('app:mounted', () => {
     ripple.mount()
-    useMutationObserver(document.body, () => {
-      ripple.mount()
-    }, { childList: true, subtree: true })
   })
   nuxtApp.vueApp.directive<HTMLElement, Partial<NuxtRippleOptions>>('ripple', {
     beforeMount(el, binding) {
       el.dataset.rippleBound = 'true'
       setAttributes(el, binding.value)
+    },
+    mounted(el) {
+      modeHandler(el, ripple.state.value, ripple.listeners, ripple.intervals)
     },
     updated(el, binding) {
       setAttributes(el, binding.value)
