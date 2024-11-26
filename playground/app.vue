@@ -13,7 +13,7 @@
   @apply bg-gray-100 text-gray-900;
 }
 .dark {
-  @apply bg-gray-900 text-gray-50;
+  @apply bg-gray-950 text-gray-50;
 }
 
 .fade-enter-active,

@@ -8,8 +8,9 @@ const dark = computed({
 const icons = { sun: 'ph:sun-duotone', moon: 'ph:moon-duotone' }
 
 const nav = ref<{ label: string, to?: string, icon?: string, click?: () => void }[][]>([[
-  { label: 'Home', to: '/' },
-  { label: 'Advanced Demo', to: '/demo' },
+  { label: 'Docs', to: '/' },
+  { label: 'Demo', to: '/demo' },
+  { label: 'Advanced Demo', to: '/advanced-demo' },
   { label: 'With Layout', to: '/with-layout' },
 ], [
   { label: '', icon: 'heroicons:paint-brush-20-solid' },

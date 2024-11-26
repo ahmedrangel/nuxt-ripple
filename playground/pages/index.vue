@@ -1,10 +1,55 @@
 <template>
   <main>
-    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full">
-      <div class="flex flex-col items-center">
-        <p class="text-4xl font-bold mb-4">Nuxt-Ripple</p>
-        <UButton v-ripple class="text-2xl p-10 font-bold">Click me!</UButton>
-      </div>
-    </div>
+    <ContentDoc path="/docs" />
   </main>
 </template>
+
+<style>
+.text-primary {
+  --tw-text-opacity: 1;
+  color: rgb(var(--color-primary-DEFAULT) / var(--tw-text-opacity));
+}
+
+code:not(.shiki *) {
+  padding: 0.125em 0.50em;
+}
+
+pre.shiki, code:not(.shiki *) {
+  border-radius: 0.25em;
+}
+
+pre.shiki {
+  padding: 1em;
+  margin: 1em 0;
+}
+
+html pre.shiki, html code:not(.shiki *) {
+  background-color: rgb(var(--color-gray-200));
+}
+
+html.dark pre.shiki, html.dark code:not(.shiki *) {
+  background-color: rgb(var(--color-gray-900));
+}
+
+table {
+  background-color: rgb(var(--color-gray-50));
+  margin: 1.5em 0;
+}
+
+html.dark table {
+  background-color: rgb(var(--color-gray-950));
+}
+
+table, th, td {
+  border: 1px solid rgb(var(--color-gray-300));
+  border-collapse: collapse;
+}
+
+html.dark table, html.dark th, html.dark td {
+  border-color: rgb(var(--color-gray-600));
+}
+
+td, th {
+  padding: 0.5em 1em;
+}
+</style>
