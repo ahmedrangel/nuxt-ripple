@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v0.0.7
+
+[compare changes](https://github.com/ahmedrangel/nuxt-ripple/compare/v0.0.6...v0.0.7)
+
+### 🚀 Enhancements
+
+- Support stacking ripple animation by creating a span element inside bounded elements when triggered ([6ef7453](https://github.com/ahmedrangel/nuxt-ripple/commit/6ef7453))
+
+### 🩹 Fixes
+
+- Ensure that only transitions fired by ripple bounded elements get their styles removed on transitionend ([3277325](https://github.com/ahmedrangel/nuxt-ripple/commit/3277325))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](http://github.com/ahmedrangel))
+
 ## v0.0.6
 
 [compare changes](https://github.com/ahmedrangel/nuxt-ripple/compare/v0.0.5...v0.0.6)
