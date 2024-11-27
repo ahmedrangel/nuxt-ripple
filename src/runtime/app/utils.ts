@@ -17,8 +17,8 @@ const applyEffects = (el: HTMLElement, styles: CssTextBuilder, endTransition?: b
   if (endTransition) {
     el.addEventListener(RippleEvent.TRANSITION_END, (event: TransitionEvent) => {
       const target = event.target as HTMLElement
-      if (event.propertyName === 'opacity' && event.pseudoElement === '::before' && target.dataset.rippleBound === 'true')
-        el.removeAttribute('style')
+      if (event.propertyName === 'opacity' && target.className === 'nuxt-ripple-animation')
+        el.remove()
     }, { once: true })
   }
   else void el.offsetTop
@@ -27,11 +27,11 @@ const applyEffects = (el: HTMLElement, styles: CssTextBuilder, endTransition?: b
 export const addHeadStyles = (config: NuxtRippleOptions) => {
   const styleId = 'nuxt-ripple-styles'
   const styleContent = `[data-ripple-bound="true"]{overflow: ${config.overflow === true ? 'visible' : 'hidden'};}`
-    + `[data-ripple-bound="true"]:before{`
+    + `[data-ripple-bound="true"] .nuxt-ripple-animation{`
     + `background-color: var(--nuxt-ripple-background-color, ${config.color});`
     + `transition: calc(var(--t, 0) * var(--nuxt-ripple-duration, ${config.duration}ms)) linear;`
     + `transform: translate(-50%, -50%) scale(var(--s, ${config.scale}));}`
-    + `.nuxt-ripple-pulse:before{`
+    + `[data-ripple-bound="true"].nuxt-ripple-pulse .nuxt-ripple-animation{`
     + `background-color: var(--nuxt-ripple-background-color, ${config.color});}`
   const rippeStyles = document.getElementById(styleId)
   if (!rippeStyles) {
@@ -45,6 +45,13 @@ export const addHeadStyles = (config: NuxtRippleOptions) => {
   }
 }
 
+const addRippleElement = (el: HTMLElement) => {
+  const ripple = document.createElement('span')
+  el.appendChild(ripple)
+  ripple.classList.add('nuxt-ripple-animation')
+  return ripple
+}
+
 export const animationHandler = (e: MouseEvent | TouchEvent, el: HTMLElement) => {
   const { clientX, clientY } = (e as TouchEvent).touches?.[0] || (e as MouseEvent)
   const { left, top, width, height } = el.getBoundingClientRect()
@@ -54,12 +61,14 @@ export const animationHandler = (e: MouseEvent | TouchEvent, el: HTMLElement) =>
   const rippleDuration = el.getAttribute('data-ripple-duration') as RippleDataAttributes['data-ripple-duration']
   const rippleScale = el.getAttribute('data-ripple-scale') as RippleDataAttributes['data-ripple-scale']
 
-  applyEffects(el, {
+  const rippleEl = addRippleElement(el)
+
+  applyEffects(rippleEl, {
     '--s': 0,
     '--o': 1,
     ...rippleColor ? { '--nuxt-ripple-background-color': rippleColor } : {},
   })
-  applyEffects(el, {
+  applyEffects(rippleEl, {
     '--t': 1,
     '--o': 0,
     '--d': Math.sqrt(width ** 2 + height ** 2) * 2,
@@ -107,12 +116,13 @@ export const modeHandler = (el: HTMLElement, config: NuxtRippleOptions, listener
     el.classList.add('nuxt-ripple-pulse')
     intervals.set(el, setInterval(() => {
       const { width, height } = el.getBoundingClientRect()
-      applyEffects(el, {
+      const rippleEl = addRippleElement(el)
+      applyEffects(rippleEl, {
         '--s': 0,
         '--o': 1,
         ...rippleColor ? { '--nuxt-ripple-background-color': rippleColor } : {},
       })
-      applyEffects(el, {
+      applyEffects(rippleEl, {
         '--t': 1,
         '--o': 0,
         '--d': Math.sqrt(width ** 2 + height ** 2) * 2,

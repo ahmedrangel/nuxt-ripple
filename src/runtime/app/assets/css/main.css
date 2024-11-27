@@ -2,7 +2,7 @@
   position: relative;
 }
 
-[data-ripple-bound="true"]:before {
+[data-ripple-bound="true"] .nuxt-ripple-animation {
   content: '';
   position: absolute;
   display: block;     
@@ -17,7 +17,7 @@
   z-index: 9999;
 }
 
-.nuxt-ripple-pulse:before {
+[data-ripple-bound="true"].nuxt-ripple-pulse .nuxt-ripple-animation {
   top: 50%;
   left: 50%;
 }
