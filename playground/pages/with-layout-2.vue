@@ -1,6 +1,16 @@
 <script setup lang="ts">
 definePageMeta({ layout: 'layout-example' })
 await new Promise(resolve => setTimeout(resolve, 1000))
+
+useSeoMeta({
+  title: `With Layout 2 | ${SITE.name}`,
+})
+
+useHead({
+  link: [
+    { rel: 'canonical', href: SITE.url + '/with-layout-2' },
+  ],
+})
 </script>
 
 <template>

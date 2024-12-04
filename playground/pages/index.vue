@@ -1,6 +1,19 @@
+<script setup lang="ts">
+useSeoMeta({
+  title: `${SITE.name}`,
+  description: 'Documentation for Nuxt Ripple',
+})
+
+useHead({
+  link: [
+    { rel: 'canonical', href: SITE.url },
+  ],
+})
+</script>
+
 <template>
   <main>
-    <ContentDoc path="/docs" />
+    <ContentDoc path="/docs" :head="false" />
   </main>
 </template>
 

@@ -30,6 +30,17 @@ onMounted(async () => {
   setInterval(() => randomColor.value = getRandomColor(), 1000)
   await generateDynamic()
 })
+
+useSeoMeta({
+  title: `Advanced Demo | ${SITE.name}`,
+  description: 'Nuxt-Ripple Advanced Demo',
+})
+
+useHead({
+  link: [
+    { rel: 'canonical', href: SITE.url + '/advanced-demo' },
+  ],
+})
 </script>
 
 <template>

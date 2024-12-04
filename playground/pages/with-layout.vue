@@ -1,5 +1,15 @@
 <script setup lang="ts">
 definePageMeta({ layout: 'layout-example' })
+
+useSeoMeta({
+  title: `With Layout | ${SITE.name}`,
+})
+
+useHead({
+  link: [
+    { rel: 'canonical', href: SITE.url + '/with-layout' },
+  ],
+})
 </script>
 
 <template>
