@@ -21,3 +21,7 @@
   top: 50%;
   left: 50%;
 }
+
+[data-ripple-overflow="true"] {
+  overflow: visible!important;
+}
