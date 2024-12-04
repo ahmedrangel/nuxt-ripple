@@ -1,8 +1,8 @@
 import type { NuxtRippleOptions } from '../../types'
-import type { UseRippleReturn } from './types'
+import type { UseRipple } from './types'
 import { useNuxtApp } from '#app'
 
-export const useRipple = (): UseRippleReturn => {
+export const useRipple = (): UseRipple => {
   const { $ripple } = useNuxtApp()
   const updateRippleConfig = (config: Partial<NuxtRippleOptions>) => {
     const newConfig = Object.assign($ripple.state.value, config)

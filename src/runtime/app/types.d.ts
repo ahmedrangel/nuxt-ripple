@@ -11,6 +11,6 @@ type ToRequiredComputedRef<T> = {
 }
 
 // Composable
-export interface UseRippleReturn extends ToRequiredComputedRef<NuxtRippleOptions> {
+export interface UseRipple extends ToRequiredComputedRef<NuxtRippleOptions> {
   updateRippleConfig: (config: Partial<NuxtRippleOptions>) => void
 }

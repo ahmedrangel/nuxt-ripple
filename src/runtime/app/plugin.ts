@@ -1,6 +1,6 @@
 import { computed, ref, type Ref } from 'vue'
 import { addHeadStyles, unmountListeners, modeHandler, setAttributes } from './utils'
-import type { Listeners, Intervals, UseRippleReturn } from './types'
+import type { Listeners, Intervals, UseRipple } from './types'
 import { defineNuxtPlugin, useAppConfig } from '#app'
 import type { NuxtRippleOptions } from '~/src/types'
 
@@ -8,12 +8,12 @@ class Ripple {
   state: Ref<NuxtRippleOptions>
   listeners: Listeners
   intervals: Intervals
-  mode: UseRippleReturn['mode']
-  color: UseRippleReturn['color']
-  duration: UseRippleReturn['duration']
-  scale: UseRippleReturn['scale']
-  pulseInterval: UseRippleReturn['pulseInterval']
-  overflow: UseRippleReturn['overflow']
+  mode: UseRipple['mode']
+  color: UseRipple['color']
+  duration: UseRipple['duration']
+  scale: UseRipple['scale']
+  pulseInterval: UseRipple['pulseInterval']
+  overflow: UseRipple['overflow']
   constructor() {
     this.state = ref(useAppConfig().ripple as NuxtRippleOptions)
     this.listeners = new Map<HTMLElement, (e: Event) => void>()
@@ -64,7 +64,16 @@ export default defineNuxtPlugin((nuxtApp) => {
 
   return {
     provide: {
-      ripple,
+      ripple: {
+        state: ripple.state,
+        mode: ripple.mode,
+        color: ripple.color,
+        duration: ripple.duration,
+        scale: ripple.scale,
+        pulseInterval: ripple.pulseInterval,
+        overflow: ripple.overflow,
+        mount: ripple.mount.bind(ripple),
+      },
     },
   }
 })
