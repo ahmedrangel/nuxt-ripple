@@ -1,6 +1,24 @@
 # Changelog
 
 
+## v0.0.8
+
+[compare changes](https://github.com/ahmedrangel/nuxt-ripple/compare/v0.0.7...v0.0.8)
+
+### 🩹 Fixes
+
+- Overflow overriding ([82b5c28](https://github.com/ahmedrangel/nuxt-ripple/commit/82b5c28))
+
+### 🏡 Chore
+
+- Update deps ([6c22df2](https://github.com/ahmedrangel/nuxt-ripple/commit/6c22df2))
+- Rename type ([937beb7](https://github.com/ahmedrangel/nuxt-ripple/commit/937beb7))
+- **docs:** Add some head info ([fd9c89e](https://github.com/ahmedrangel/nuxt-ripple/commit/fd9c89e))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](http://github.com/ahmedrangel))
+
 ## v0.0.7
 
 [compare changes](https://github.com/ahmedrangel/nuxt-ripple/compare/v0.0.6...v0.0.7)
